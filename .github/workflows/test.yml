@@ -36,8 +36,8 @@ jobs:
       - uses: ./
         with:
           id: |
-            - run1
-            - run2
-            - run3
+            run1
+            run2
+            run3
           cwd: ./tests
           filename: CUSTOM.md
