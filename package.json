@@ -4,8 +4,8 @@
   "description": "A GitHub action to run Runme in CI.",
   "author": "Christian Bromann <christian@stateful.com>",
   "license": "Apache-2.0",
-  "export": "dist/index.js",
-  "type": "module",
+  "main": "dist/index.js",
+  "type": "commonjs",
   "homepage": "https://runme.dev",
   "repository": {
     "type": "git",

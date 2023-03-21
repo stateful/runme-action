@@ -11,7 +11,6 @@ const owner = 'stateful'
 const repo = 'runme'
 const octokit = new Octokit()
 
-const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
 
 interface GitHubRelease {
