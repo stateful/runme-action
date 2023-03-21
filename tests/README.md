@@ -1,5 +1,5 @@
 # Action Test Markdown
 
-```sh name=testMe
+```sh { name=testMe }
 echo "Hello World"
 ```

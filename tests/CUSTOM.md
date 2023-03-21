@@ -1,19 +1,19 @@
 # Action Test Markdown
 
-```sh name=testMe
+```sh { name=testMe }
 echo "Hello Custom World"
 ```
 
 ## Run Multiple
 
-```sh name=run1
+```sh { name=run1 }
 echo "First Run"
 ```
 
-```sh name=run2
+```sh { name=run2 }
 echo "Second Run"
 ```
 
-```sh name=run3
+```sh { name=run3 }
 echo "Third Run"
 ```
