@@ -24,7 +24,7 @@ export async function installRunme(version?: string) {
   const release = await getRelease(version)
 
   const arch = os.arch()
-  const binary = `${os.platform()}_${arch === 'x64' ? 'x86_64' : arch}.tar.gz`
+  const binary = `${os.platform().replace('win32', 'windows')}_${arch === 'x64' ? 'x86_64' : arch}.tar.gz`
   const downloadUrl = `https://download.stateful.com/runme/${release.tag_name.slice(1)}/runme_${binary}`
 
   const cachedVersion = find('runme', release.tag_name, arch)
