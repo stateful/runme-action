@@ -29,7 +29,7 @@ export async function installRunme(version?: string) {
   const cachedVersion = find('runme', release.tag_name, arch)
   if (cachedVersion) {
     addPath(cachedVersion)
-    return [cachedVersion, release.tag_name]
+    return release.tag_name
   }
 
   try {
@@ -43,7 +43,7 @@ export async function installRunme(version?: string) {
     const extractedFolder = await extractTar(runmeTar, downloadDir)
     const cachePath = await cacheDir(extractedFolder, 'runme', release.tag_name, arch)
     addPath(cachePath)
-    return [cachedVersion, release.tag_name]
+    return release.tag_name
   } catch (err: unknown) {
     throw new Error(`Failed downloading Runme: ${(err as Error).message}`)
   }

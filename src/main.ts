@@ -21,12 +21,12 @@ async function run(): Promise<void> {
   const cwd = getInput('cwd')
     ? path.resolve(process.env.GITHUB_WORKSPACE!, getInput('cwd'))
     : process.env.GITHUB_WORKSPACE
-  const [runmePath, runmeVersion] = await installRunme(version)
+  const runmeVersion = await installRunme(version)
 
   info(`Running Runme ${runmeVersion}`)
   const params = [command, `chdir=${cwd}`, `filename=${filename}`]
-  info(`${runmePath} ${params.join(' ')}`)
-  await exec(runmePath, params, { cwd })
+  info(`runme ${params.join(' ')}`)
+  await exec('runme', params, { cwd })
 }
 
 run().catch((error) => setFailed(error.message))
