@@ -4,7 +4,7 @@
   "description": "A GitHub action to run Runme in CI.",
   "author": "Christian Bromann <christian@stateful.com>",
   "license": "Apache-2.0",
-  "export": "build/index.js",
+  "export": "dist/index.js",
   "type": "module",
   "homepage": "https://runme.dev",
   "repository": {
@@ -23,7 +23,7 @@
     "action"
   ],
   "scripts": {
-    "build": "ncc build src/main.ts -o dist/main",
+    "build": "ncc build src/main.ts -o dist",
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "npm run build -- --watch"
   },
