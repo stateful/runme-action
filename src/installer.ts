@@ -4,6 +4,7 @@ import path from 'node:path'
 
 import { addPath } from '@actions/core'
 import { Octokit } from '@octokit/rest'
+import { info } from '@actions/core'
 import { downloadTool, extractTar, cacheDir, find } from '@actions/tool-cache'
 
 const owner = 'stateful'
@@ -39,6 +40,7 @@ export async function installRunme(version?: string) {
     const downloadDir = await path.resolve(rootDir, 'bin')
     await fs.mkdir(downloadDir, { recursive: true })
 
+    info(`Download Runme ${release.tag_name} from ${downloadUrl}`)
     const runmeTar = await downloadTool(downloadUrl)
     const extractedFolder = await extractTar(runmeTar, downloadDir)
     const cachePath = await cacheDir(extractedFolder, 'runme', release.tag_name, arch)
