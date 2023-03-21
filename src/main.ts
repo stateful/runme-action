@@ -25,6 +25,7 @@ async function run(): Promise<void> {
 
   info(`Running Runme ${runmeVersion}`)
   const params = [command, `chdir=${cwd}`, `filename=${filename}`]
+  info(`${runmePath} ${params.join(' ')}`)
   await exec(runmePath, params, { cwd })
 }
 
