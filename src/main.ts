@@ -25,7 +25,7 @@ async function run(): Promise<void> {
 
   info(`Running Runme ${runmeVersion}`)
   for (const id of ids) {
-    const params = [command, id, `chdir=${cwd}`, `filename=${filename}`]
+    const params = [command, id, `--chdir=${cwd}`, `--filename=${filename}`]
     info(`runme ${params.join(' ')}`)
     await exec('runme', params, { cwd })
   }
