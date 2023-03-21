@@ -2,6 +2,8 @@
 
 A GitHub Action to run Runme in CI.
 
+> __Note:__ Runme is not yet supported on Windows, see [stateful/runme#173](https://github.com/stateful/runme/issues/173) for status updates.
+
 ## Example
 
 Given you have a markdown file that contains one or several set-up scripts, e.g.
