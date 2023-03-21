@@ -48,7 +48,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Action Test
     steps:
-      - uses: stateful/runme@v1
+      - uses: stateful/runme-action@v1
         with:
           id: installCli
 ```
@@ -61,7 +61,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Action Test
     steps:
-      - uses: stateful/runme@v1
+      - uses: stateful/runme-action@v1
         with:
           id: |
             installCli
