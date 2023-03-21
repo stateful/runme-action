@@ -1,7 +1,7 @@
 import path from 'node:path'
 
 import { exec } from '@actions/exec'
-import { getInput, getMultilineInput, setFailed, info, error } from '@actions/core'
+import { getInput, getMultilineInput, setFailed, info } from '@actions/core'
 
 import { installRunme } from './installer.js'
 
@@ -19,7 +19,7 @@ async function run(): Promise<void> {
 
   const filename = getInput('filename') || DEFAULT_FILENAME
   const cwd = getInput('cwd')
-    ? path.resolve(process.env.GITHUB_WORKSPACE!, getInput('cwd'))
+    ? path.resolve(process.env.GITHUB_WORKSPACE || process.cwd(), getInput('cwd'))
     : process.env.GITHUB_WORKSPACE
   const runmeVersion = await installRunme(version)
 

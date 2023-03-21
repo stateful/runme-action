@@ -10,6 +10,7 @@ import { downloadTool, extractTar, cacheDir, find } from '@actions/tool-cache'
 const owner = 'stateful'
 const repo = 'runme'
 const rootDir = path.resolve(__dirname, '..')
+const downloadDir = path.resolve(rootDir, 'bin')
 
 interface GitHubRelease {
   tag_name: string
@@ -36,7 +37,6 @@ export async function installRunme(version?: string) {
     /**
      * create download dir
      */
-    const downloadDir = await path.resolve(rootDir, 'bin')
     await fs.mkdir(downloadDir, { recursive: true })
 
     info(`Download Runme ${release.tag_name} from ${downloadUrl}`)
