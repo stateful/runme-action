@@ -1,0 +1,26 @@
+# action.yml
+name: "Runme Action"
+description: "A GitHub Action to run Runme in CI."
+author: Stateful Inc.
+branding:
+  icon: play
+  color: purple
+inputs:
+  command:
+    description: Defines which Runme command to run.
+    default: "run"
+  id:
+    description: Only use if `command` parameter is set to `run` or `exec`. Name of the markdown code cell to run or a list of code cells to execute in order.
+    required: false
+  version:
+    description: Defines which Runme version to use. You can find all Runme release on [GitHub](https://github.com/stateful/runme/releases).
+    required: false
+  cwd:
+    description: Working directory to run the `runme` command in. If set it will be resolved relatively to the workspace directory.
+    required: false
+  filename:
+    description: An url to a graphql schema to help scan the full API.
+    required: false
+runs:
+  using: "node16"
+  main: "dist/index.js"

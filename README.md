@@ -1,6 +1,6 @@
 # Runme GitHub Action
 
-A GitHub action to run Runme in CI.
+A GitHub Action to run Runme in CI.
 
 ## Example
 
