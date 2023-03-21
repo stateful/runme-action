@@ -1,0 +1,40 @@
+name: Test
+on: push
+
+jobs:
+  test:
+    name: Action Test
+    strategy:
+      matrix:
+        os:
+          - macos-latest
+          - ubuntu-latest
+          - windows-latest
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: "Install Dependencies"
+        run: npm install
+
+      - name: "Build the package"
+        run: npm run build
+
+      - uses: ./
+        with:
+          command: list
+
+      - uses: ./
+        with:
+          command: run
+          cwd: ./tests
+
+      - uses: ./
+        with:
+          command: run
+          cwd: ./tests
+          filename: CUSTOM.md

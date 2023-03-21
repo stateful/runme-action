@@ -1,0 +1,41 @@
+{
+  "name": "runme-action",
+  "version": "0.0.0",
+  "description": "A GitHub action to run Runme in CI.",
+  "author": "Christian Bromann <christian@stateful.com>",
+  "license": "Apache-2.0",
+  "export": "build/index.js",
+  "type": "module",
+  "homepage": "https://runme.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stateful/runme-action.git"
+  },
+  "bugs": {
+    "url": "https://github.com/stateful/runme-action/issues"
+  },
+  "keywords": [
+    "runme",
+    "readmeops",
+    "stateful",
+    "markdown",
+    "CI",
+    "action"
+  ],
+  "scripts": {
+    "build": "ncc build src/main.ts -o dist/main",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "npm run build -- --watch"
+  },
+  "dependencies": {
+    "@actions/core": "^1.10.0",
+    "@actions/exec": "^1.1.1",
+    "@actions/tool-cache": "^2.0.1",
+    "@octokit/rest": "^19.0.7"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.5",
+    "@vercel/ncc": "^0.36.1",
+    "typescript": "^5.0.2"
+  }
+}
