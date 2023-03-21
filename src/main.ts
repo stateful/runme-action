@@ -1,6 +1,6 @@
 import path from 'node:path'
 
-import exec from '@actions/exec'
+import { exec } from '@actions/exec'
 import { getInput, setFailed, info, error } from '@actions/core'
 
 import { installRunme } from './installer.js'
@@ -25,7 +25,7 @@ async function run(): Promise<void> {
 
   info(`Running Runme ${runmeVersion}`)
   const params = [command, `chdir=${cwd}`, `filename=${filename}`]
-  await exec.exec(runmePath, params, { cwd })
+  await exec(runmePath, params, { cwd })
 }
 
 run().catch((error) => setFailed(error.message))

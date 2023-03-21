@@ -1,9 +1,8 @@
 import os from 'node:os'
 import fs from 'node:fs/promises'
-import url from 'node:url'
 import path from 'node:path'
 
-import core from '@actions/core'
+import { addPath } from '@actions/core'
 import { Octokit } from '@octokit/rest'
 import { downloadTool, extractTar, cacheDir, find } from '@actions/tool-cache'
 
@@ -29,7 +28,7 @@ export async function installRunme(version?: string) {
 
   const cachedVersion = find('runme', release.tag_name, arch)
   if (cachedVersion) {
-    core.addPath(cachedVersion)
+    addPath(cachedVersion)
     return [cachedVersion, release.tag_name]
   }
 
@@ -43,7 +42,7 @@ export async function installRunme(version?: string) {
     const runmeTar = await downloadTool(downloadUrl)
     const extractedFolder = await extractTar(runmeTar, downloadDir)
     const cachePath = await cacheDir(extractedFolder, 'runme', release.tag_name, arch)
-    core.addPath(cachePath)
+    addPath(cachePath)
     return [cachedVersion, release.tag_name]
   } catch (err: unknown) {
     throw new Error(`Failed downloading Runme: ${(err as Error).message}`)
