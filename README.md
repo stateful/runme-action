@@ -1,4 +1,4 @@
-# Runme GitHub Action
+# Runme GitHub Action [![Test](https://github.com/stateful/runme-action/actions/workflows/test.yml/badge.svg)](https://github.com/stateful/runme-action/actions/workflows/test.yml)
 
 A GitHub Action to run Runme in CI.
 
