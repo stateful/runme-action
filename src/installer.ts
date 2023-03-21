@@ -9,7 +9,7 @@ import { downloadTool, extractTar, cacheDir, find } from '@actions/tool-cache'
 
 const owner = 'stateful'
 const repo = 'runme'
-const octokit = new Octokit()
+const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 
 const rootDir = path.resolve(__dirname, '..')
 
