@@ -4,14 +4,11 @@ import path from 'node:path'
 
 import { addPath } from '@actions/core'
 import { Octokit } from '@octokit/rest'
-import { info } from '@actions/core'
+import { info, getInput } from '@actions/core'
 import { downloadTool, extractTar, cacheDir, find } from '@actions/tool-cache'
 
 const owner = 'stateful'
 const repo = 'runme'
-info(`USE ${process.env.GITHUB_TOKEN}`)
-const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
-
 const rootDir = path.resolve(__dirname, '..')
 
 interface GitHubRelease {
@@ -52,7 +49,8 @@ export async function installRunme(version?: string) {
   }
 }
 
-async function getRelease(version?: string) {
+async function getRelease(version?: string) {const token = getInput('token')
+  const octokit = new Octokit({ auth: token })
   const releases: GitHubRelease[] = []
 
   try {

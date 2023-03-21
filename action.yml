@@ -21,6 +21,10 @@ inputs:
   filename:
     description: An url to a graphql schema to help scan the full API.
     required: false
+  token:
+    description: 'The Github token.'
+    required: false
+    default: ${{ github.token }}
 runs:
   using: "node16"
   main: "dist/index.js"
