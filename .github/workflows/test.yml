@@ -35,6 +35,9 @@ jobs:
 
       - uses: ./
         with:
-          id: testMe
+          id: |
+            - run1
+            - run2
+            - run3
           cwd: ./tests
           filename: CUSTOM.md

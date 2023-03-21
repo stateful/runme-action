@@ -42,30 +42,30 @@ You can run these documented commands in CI using [Runme](https://runme.dev) via
 
 ```yaml
 jobs:
-    test:
-        runs-on: ubuntu-latest
-        name: Action Test
-        steps:
-            - uses: stateful/runme@v1
-              with:
-                id: installCli
+  test:
+    runs-on: ubuntu-latest
+    name: Action Test
+    steps:
+      - uses: stateful/runme@v1
+        with:
+          id: installCli
 ```
 
 or run multiple sections in order:
 
 ```yaml
 jobs:
-    test:
-        runs-on: ubuntu-latest
-        name: Action Test
-        steps:
-            - uses: stateful/runme@v1
-              with:
-                id:
-                    - installCli
-                    - installLinkerD
-                    - viewDashboard
-                    - injectAndDeploy
+  test:
+    runs-on: ubuntu-latest
+    name: Action Test
+    steps:
+      - uses: stateful/runme@v1
+        with:
+          id: |
+            installCli
+            installLinkerD
+            viewDashboard
+            injectAndDeploy
 ```
 
 ## Inputs
