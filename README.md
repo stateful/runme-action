@@ -9,7 +9,7 @@
 
 ## Runme GitHub Action
 
-A GitHub Action to run [Runme](https://runme.dev) in CI. Instead of calling commands and scripts directly as part of your CI step, link existing code snippets from your project documentation into the CI execution to ensure that they stay up to date and stay valid. It binds documentation snippets with your CI/CD process and helps validate correctness of your project documentation.
+A GitHub Action to run [Runme](https://runme.dev) in CI. Instead of calling commands and scripts directly as part of your CI step, link existing code snippets from your project documentation into the CI execution to ensure that they stay up to date and valid. It binds documentation snippets with your CI/CD process and helps validate correctness of your project documentation.
 
 The action is powered by [Runme](https://runme.dev) which is a tool that helps you supercharge your markdown files.
 
