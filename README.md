@@ -4,7 +4,7 @@
 
 <p align="center">
   <a href="https://github.com/stateful/runme-action/actions/workflows/test.yml"><img alt="Action Unit Tests Status" src="https://github.com/stateful/runme-action/actions/workflows/test.yml/badge.svg"></a>
-  <a href="https://github.com/stateful/runme-action/actions?query=workflow%3Aaudit"><img alt="Action Audit Status" src="https://github.com/stateful/runme-action/workflows/audit/badge.svg"></a>
+  <a href="https://github.com/stateful/runme-action/actions?query=workflow%3Aaudit"><img alt="Action Audit Status" src="https://github.com/stateful/runme-action/actions/workflows/audit.yml/badge.svg"></a>
 </p>
 
 ## Runme GitHub Action
