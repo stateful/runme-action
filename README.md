@@ -1,6 +1,17 @@
-# Runme GitHub Action [![Test](https://github.com/stateful/runme-action/actions/workflows/test.yml/badge.svg)](https://github.com/stateful/runme-action/actions/workflows/test.yml)
+<p align="center">
+  <img src="https://runme.dev/img/logo.svg" width="200px">
+</p>
 
-A GitHub Action to run Runme in CI.
+<p align="center">
+  <a href="https://github.com/stateful/runme-action/actions/workflows/test.yml"><img alt="Action Unit Tests Status" src="https://github.com/stateful/runme-action/actions/workflows/test.yml/badge.svg"></a>
+  <a href="https://github.com/stateful/runme-action/actions?query=workflow%3Aaudit"><img alt="Action Audit Status" src="https://github.com/stateful/runme-action/workflows/audit/badge.svg"></a>
+</p>
+
+## Runme GitHub Action
+
+A GitHub Action to run [Runme](https://runme.dev) in CI. Instead of calling commands and scripts directly as part of your CI step, link existing code snippets from your project documentation into the CI execution to ensure that they stay up to date and valid. It binds documentation snippets with your CI/CD process and helps validate correctness of your project documentation.
+
+The action is powered by [Runme](https://runme.dev) which is a tool that helps you supercharge your markdown files.
 
 > __Note:__ Runme is not yet supported on Windows, see [stateful/runme#173](https://github.com/stateful/runme/issues/173) for status updates.
 
@@ -8,37 +19,36 @@ A GitHub Action to run Runme in CI.
 
 Given you have a markdown file that contains one or several set-up scripts, e.g.
 
-    ## Running
+    ## Setup
 
-    ### In Minikube
+    ### Install Dependencies
 
-    Deploy the application to Minikube using the Linkerd2 service mesh.
+    As a first step, please install the project dependencies via:
 
-    #### Install the `linkerd` CLI
-
-    ```sh name=installCli
-    curl https://run.linkerd.io/install | sh
+    ```sh name=installDeps
+    npm install
     ```
 
-    #### Install Linkerd2
+    ### Build Project
 
-    ```sh name=installLinkerD
-    linkerd install --crds | kubectl apply -f -
-    linkerd install --set proxyInit.runAsRoot=true | kubectl apply -f -
+    To build project files and test the project, run:
+
+    ```sh name=build
+    npm run compile
+    npm run build
     ```
 
-    #### View the dashboard!
+    ### Run Tests
 
-    ```sh name=viewDashboard
-    linkerd viz install | kubectl apply -f - # install the on-cluster metrics stack
-    linkerd viz dashboard --verbose
+    To run all tests, execute:
+
+    ```sh name=tests
+    npx eslint
+    npx vitest
+    npx wdio run ./wdio.conf.js
     ```
 
-    #### Inject, Deploy, and Enjoy
-
-    ```sh name=injectAndDeploy
-    kubectl kustomize kustomize/deployment | linkerd inject - | kubectl apply -f -
-    ```
+    ...
 
 You can run these documented commands in CI using [Runme](https://runme.dev) via:
 
@@ -50,7 +60,7 @@ jobs:
     steps:
       - uses: stateful/runme-action@v1
         with:
-          id: installCli
+          id: installDeps
 ```
 
 or run multiple sections in order:
@@ -61,13 +71,13 @@ jobs:
     runs-on: ubuntu-latest
     name: Action Test
     steps:
-      - uses: stateful/runme-action@v1
+      - name: Setup / Test Project
+        uses: stateful/runme-action@v1
         with:
           id: |
-            installCli
-            installLinkerD
-            viewDashboard
-            injectAndDeploy
+            installDeps
+            build
+            tests
 ```
 
 ## Inputs
