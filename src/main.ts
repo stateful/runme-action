@@ -36,7 +36,8 @@ async function run(): Promise<void> {
     })
     await waitOn({
       resources: [serverAddress],
-      log: true
+      log: true,
+      verbose: true
     })
   }
 
