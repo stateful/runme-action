@@ -34,12 +34,7 @@ async function run(): Promise<void> {
     server = cp.spawn('runme', ['server', '--address', serverAddress], {
       detached: true
     })
-    const resource = (
-      serverAddress.startsWith('unix://') ||
-      serverAddress.startsWith('http://') ||
-      serverAddress.startsWith('https://')
-    ) ? serverAddress : `http://${serverAddress}`
-    await waitOn({ resources: [resource] })
+    await waitOn({ resources: [serverAddress] })
   }
 
   for (const sh of run) {
