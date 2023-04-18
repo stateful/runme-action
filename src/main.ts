@@ -1,6 +1,7 @@
 import path from 'node:path'
 import cp, { type ChildProcess } from 'node:child_process'
 
+import waitOn from 'wait-on'
 import { exec } from '@actions/exec'
 import { getInput, getMultilineInput, setFailed, info } from '@actions/core'
 
@@ -33,6 +34,12 @@ async function run(): Promise<void> {
     server = cp.spawn('runme', ['server', '--address', serverAddress], {
       detached: true
     })
+    const resource = (
+      serverAddress.startsWith('unix://') ||
+      serverAddress.startsWith('http://') ||
+      serverAddress.startsWith('https://')
+    ) ? serverAddress : `http://${serverAddress}`
+    await waitOn({ resources: [resource] })
   }
 
   for (const sh of run) {
