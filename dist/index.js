@@ -13169,17 +13169,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const node_path_1 = __importDefault(__nccwpck_require__(9411));
+const node_child_process_1 = __importDefault(__nccwpck_require__(7718));
 const exec_1 = __nccwpck_require__(1514);
 const core_1 = __nccwpck_require__(2186);
 const installer_js_1 = __nccwpck_require__(2574);
 const DEFAULT_COMMAND = 'run';
 const DEFAULT_FILENAME = 'README.md';
+let server;
 async function run() {
     const version = (0, core_1.getInput)('version');
     const command = (0, core_1.getInput)('command') || DEFAULT_COMMAND;
     const ids = (0, core_1.getMultilineInput)('id');
-    if (command === 'run' && ids.length === 0) {
-        throw new Error('Runme Action: run command has no "id" parameter to execute');
+    const serverAddress = (0, core_1.getInput)('serverAddress');
+    const run = (0, core_1.getMultilineInput)('run');
+    if (command === 'run' && ids.length === 0 && run.length === 0) {
+        throw new Error('Runme Action: run command has no "id" nor "run" parameter to execute');
     }
     const filename = (0, core_1.getInput)('filename') || DEFAULT_FILENAME;
     const cwd = (0, core_1.getInput)('cwd')
@@ -13187,13 +13191,30 @@ async function run() {
         : process.env.GITHUB_WORKSPACE;
     const runmeVersion = await (0, installer_js_1.installRunme)(version);
     (0, core_1.info)(`Running Runme ${runmeVersion}`);
+    if (serverAddress) {
+        (0, core_1.info)(`Start Runme Server at ${serverAddress}`);
+        server = node_child_process_1.default.spawn('runme', ['server', '--address', serverAddress], {
+            detached: true
+        });
+    }
+    for (const sh of run) {
+        (0, core_1.info)(`run "${sh}"`);
+        await (0, exec_1.exec)(sh, [], { cwd });
+    }
     for (const id of ids) {
         const params = [command, id, `--chdir=${cwd}`, `--filename=${filename}`];
         (0, core_1.info)(`runme ${params.join(' ')}`);
         await (0, exec_1.exec)('runme', params, { cwd });
     }
 }
-run().catch((error) => (0, core_1.setFailed)(error.message));
+run()
+    .catch((error) => (0, core_1.setFailed)(error.message))
+    .finally(() => {
+    if (server) {
+        (0, core_1.info)('Shutting down Runme Server');
+        server.kill();
+    }
+});
 
 
 /***/ }),
@@ -13267,6 +13288,14 @@ module.exports = require("https");
 
 "use strict";
 module.exports = require("net");
+
+/***/ }),
+
+/***/ 7718:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:child_process");
 
 /***/ }),
 
