@@ -50,7 +50,8 @@ export async function installRunme(version?: string) {
   }
 }
 
-async function getRelease(version?: string) {const token = getInput('token')
+async function getRelease(version?: string) {
+  const token = getInput('token')
   const octokit = new Octokit({ auth: token })
   const releases: GitHubRelease[] = []
 

@@ -27,16 +27,19 @@ jobs:
       - name: Run Eslint
         run: npm test
 
-      - uses: ./
+      - name: it can run list command
+        uses: ./
         with:
           command: list
 
-      - uses: ./
+      - name: it can run a single cell id with cwd
+        uses: ./
         with:
           id: testMe
           cwd: ./tests
 
-      - uses: ./
+      - name: it can run multiple cell ids with cwd and filename property
+        uses: ./
         with:
           id: |
             run1
@@ -44,3 +47,14 @@ jobs:
             run3
           cwd: ./tests
           filename: CUSTOM.md
+
+      - name: it supports a run command to run arbitrary shell
+        uses: ./
+        with:
+          run: echo "Hello World"
+
+      - name: it allows to start a server
+        uses: ./
+        with:
+          serverAddress: localhost:7863
+          run: echo "Hello World"

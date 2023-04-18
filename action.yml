@@ -21,8 +21,14 @@ inputs:
   filename:
     description: An url to a graphql schema to help scan the full API.
     required: false
+  serverAddress:
+    description: If serverAddress is set the action will start a Runme server on given address.
+    required: false
+  run:
+    description: Shell script to be executed within a Runme session.
+    required: false
   token:
-    description: 'The Github token.'
+    description: 'A Github token to download the Runme release without being rate limited. Defaults to token of workflow initiator.'
     required: false
     default: ${{ github.token }}
 runs:
