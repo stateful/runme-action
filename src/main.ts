@@ -35,7 +35,7 @@ async function run(): Promise<void> {
       detached: true
     })
     await waitOn({
-      resources: [`http-get://${serverAddress}`],
+      resources: [`tcp:${serverAddress}`],
       log: true,
       verbose: true
     })
