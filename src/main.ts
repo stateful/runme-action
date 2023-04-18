@@ -34,7 +34,10 @@ async function run(): Promise<void> {
     server = cp.spawn('runme', ['server', '--address', serverAddress], {
       detached: true
     })
-    await waitOn({ resources: [serverAddress] })
+    await waitOn({
+      resources: [serverAddress],
+      log: true
+    })
   }
 
   for (const sh of run) {
