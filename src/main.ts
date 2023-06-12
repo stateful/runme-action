@@ -36,7 +36,12 @@ async function run(): Promise<void> {
   }
 
   info(`runme ${params.join(' ')}`)
-  await exec('runme', params)
+  await exec('runme', params, {
+    env: {
+      ...process.env,
+      RUNME_PROJECT: '',
+    }
+  })
 }
 
 run()

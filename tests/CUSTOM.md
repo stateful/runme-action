@@ -1,9 +1,3 @@
-# Action Test Markdown
-
-```sh { name=testMe }
-echo "Hello Custom World"
-```
-
 ## Run Multiple
 
 ```sh { name=run1 }
