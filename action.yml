@@ -17,7 +17,7 @@ inputs:
     required: false
   project:
     description: Path to project directory (enables project mode)
-    default: ${{ env.GITHUB_WORKSPACE }}
+    default: ${{ github.workspace }}
   serverAddress:
     description: If serverAddress is set the action will start a Runme server on given address.
     required: false
