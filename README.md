@@ -58,7 +58,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Action Test
     steps:
-      - uses: stateful/runme-action@v1
+      - uses: stateful/runme-action@v2
         with:
           workflows: installDeps
 ```
@@ -72,7 +72,7 @@ jobs:
     name: Action Test
     steps:
       - name: Setup / Test Project
-        uses: stateful/runme-action@v1
+        uses: stateful/runme-action@v2
         with:
           # enable to run workflows in parallel
           # parallel: true
@@ -93,7 +93,7 @@ List of workflow commands to execute.
 
 ```yaml
 - name: Setup / Test Project
-  uses: stateful/runme-action@v1
+  uses: stateful/runme-action@v2
   with:
     workflows: |
       installDeps
