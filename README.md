@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://runme.dev/img/logo.svg" width="200px">
+  <img src="https://runme.dev/runme_logo.svg" width="200px">
 </p>
 
 <p align="center">
@@ -60,7 +60,7 @@ jobs:
     steps:
       - uses: stateful/runme-action@v1
         with:
-          id: installDeps
+          workflows: installDeps
 ```
 
 or run multiple sections in order:
@@ -74,7 +74,9 @@ jobs:
       - name: Setup / Test Project
         uses: stateful/runme-action@v1
         with:
-          id: |
+          # enable to run workflows in parallel
+          # parallel: true
+          workflows: |
             installDeps
             build
             tests
@@ -82,37 +84,35 @@ jobs:
 
 ## Inputs
 
-### `command`:
+### `workflows`:
 
-Defines which Runme command to run.
+List of workflow commands to execute.
 
-**Default:** `run`
+**Required:** `true`
+**Example:**
 
-### `id`:
-
-Only use if `command` parameter is set to `run` or `exec`.
-
-**Required** Name of the markdown code cell to run or a list of code cells to execute in order.
+```yaml
+- name: Setup / Test Project
+  uses: stateful/runme-action@v1
+  with:
+    workflows: |
+      installDeps
+      build
+      tests
+```
 
 ### `version`:
 
 Defines which Runme version to use. You can find all Runme release on [GitHub](https://github.com/stateful/runme/releases).
 
 **Default:** `latest`<br />
-**Example:** `v0.6.5`
+**Example:** `v1.2.4`
 
-### `cwd`:
+### `parallel`:
 
-Working directory to run the `runme` command in. If set it will be resolved relatively to the workspace directory.
+If set to true, Runme will run these commands in parallel.
 
-**Default:** workspace directory (defined by `GITHUB_WORKSPACE` environment variable)
-**Example:** `./docs`
-
-### `filename`:
-
-Filename for Runme to read commands from.
-
-**Default:** `README.md`
+**Default:** `false`
 
 ## Contributing & Feedback
 

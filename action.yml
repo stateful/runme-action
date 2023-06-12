@@ -6,26 +6,20 @@ branding:
   icon: play
   color: purple
 inputs:
-  command:
-    description: Defines which Runme command to run.
-    default: "run"
-  id:
+  parallel:
+    description: If set to true, Runme will run these commands in parallel.
+    default: "false"
+  workflows:
     description: Only use if `command` parameter is set to `run` or `exec`. Name of the markdown code cell to run or a list of code cells to execute in order.
     required: false
   version:
     description: Defines which Runme version to use. You can find all Runme release on [GitHub](https://github.com/stateful/runme/releases).
     required: false
-  cwd:
-    description: Working directory to run the `runme` command in. If set it will be resolved relatively to the workspace directory.
-    required: false
-  filename:
-    description: An url to a graphql schema to help scan the full API.
-    required: false
+  project:
+    description: Path to project directory (enables project mode)
+    default: ${{ env.GITHUB_WORKSPACE }}
   serverAddress:
     description: If serverAddress is set the action will start a Runme server on given address.
-    required: false
-  run:
-    description: Shell script to be executed within a Runme session.
     required: false
   token:
     description: 'A Github token to download the Runme release without being rate limited. Defaults to token of workflow initiator.'

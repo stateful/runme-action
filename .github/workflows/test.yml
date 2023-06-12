@@ -27,34 +27,24 @@ jobs:
       - name: Run Eslint
         run: npm test
 
-      - name: it can run list command
+      - name: it can run a single cell
         uses: ./
         with:
-          command: list
+          workflows: testMe
 
-      - name: it can run a single cell id with cwd
+      - name: it can run multiple cell ids
         uses: ./
         with:
-          id: testMe
-          cwd: ./tests
-
-      - name: it can run multiple cell ids with cwd and filename property
-        uses: ./
-        with:
-          id: |
+          workflows: |
             run1
             run2
             run3
-          cwd: ./tests
-          filename: CUSTOM.md
 
-      - name: it supports a run command to run arbitrary shell
+      - name: it can run multiple cell ids in parallel
         uses: ./
         with:
-          run: echo "Hello World"
-
-      - name: it allows to start a server
-        uses: ./
-        with:
-          serverAddress: localhost:7863
-          run: echo "Hello World"
+          parallel: true
+          workflows: |
+            run1
+            run2
+            run3

@@ -1,4 +1,3 @@
-import path from 'node:path'
 import cp, { type ChildProcess } from 'node:child_process'
 
 import waitOn from 'wait-on'
@@ -7,25 +6,20 @@ import { getInput, getMultilineInput, setFailed, info } from '@actions/core'
 
 import { installRunme } from './installer.js'
 
-const DEFAULT_COMMAND = 'run'
-const DEFAULT_FILENAME = 'README.md'
 let server: ChildProcess | undefined
 
 async function run(): Promise<void> {
   const version = getInput('version')
-  const command = getInput('command') || DEFAULT_COMMAND
-  const ids = getMultilineInput('id')
+  const parallel = getInput('parallel') === 'true'
+  const workflows = getMultilineInput('workflows')
   const serverAddress = getInput('serverAddress')
-  const run = getMultilineInput('run')
 
-  if (command === 'run' && ids.length === 0 && run.length === 0) {
-    throw new Error('Runme Action: run command has no "id" nor "run" parameter to execute')
+  const params = ['run']
+  if (parallel) {
+    params.push('-p')
   }
+  params.push(...workflows)
 
-  const filename = getInput('filename') || DEFAULT_FILENAME
-  const cwd = getInput('cwd')
-    ? path.resolve(process.env.GITHUB_WORKSPACE || process.cwd(), getInput('cwd'))
-    : process.env.GITHUB_WORKSPACE
   const runmeVersion = await installRunme(version)
   info(`Running Runme ${runmeVersion}`)
 
@@ -41,16 +35,8 @@ async function run(): Promise<void> {
     })
   }
 
-  for (const sh of run) {
-    info(`run "${sh}"`)
-    await exec(sh, [], { cwd })
-  }
-
-  for (const id of ids) {
-    const params = [command, id, `--chdir=${cwd}`, `--filename=${filename}`]
-    info(`runme ${params.join(' ')}`)
-    await exec('runme', params, { cwd })
-  }
+  info(`runme ${params.join(' ')}`)
+  await exec('runme', params)
 }
 
 run()
