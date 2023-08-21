@@ -37,11 +37,11 @@
     "wait-on": "^7.0.1"
   },
   "devDependencies": {
-    "@types/node": "^20.5.0",
+    "@types/node": "^20.5.1",
     "@types/wait-on": "^5.3.1",
-    "@typescript-eslint/eslint-plugin": "^6.3.0",
-    "@typescript-eslint/parser": "^6.3.0",
-    "@typescript-eslint/utils": "^6.3.0",
+    "@typescript-eslint/eslint-plugin": "^6.4.0",
+    "@typescript-eslint/parser": "^6.4.0",
+    "@typescript-eslint/utils": "^6.4.0",
     "@vercel/ncc": "^0.36.1",
     "eslint": "^8.47.0",
     "eslint-plugin-unicorn": "^48.0.1",
