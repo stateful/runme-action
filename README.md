@@ -25,7 +25,7 @@ Given you have a markdown file that contains one or several set-up scripts, e.g.
 
     As a first step, please install the project dependencies via:
 
-    ```sh name=installDeps
+    ```sh {"name":"installDeps"}
     npm install
     ```
 
@@ -33,7 +33,7 @@ Given you have a markdown file that contains one or several set-up scripts, e.g.
 
     To build project files and test the project, run:
 
-    ```sh name=build
+    ```sh {"name":"build"}
     npm run compile
     npm run build
     ```
@@ -42,7 +42,7 @@ Given you have a markdown file that contains one or several set-up scripts, e.g.
 
     To run all tests, execute:
 
-    ```sh name=tests
+    ```sh {"name":"tests"}
     npx eslint
     npx vitest
     npx wdio run ./wdio.conf.js
